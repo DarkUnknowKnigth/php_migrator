@@ -1,6 +1,14 @@
 # `php-migrator`
 
-CLI en Rust para analizar, mapear la lógica y migrar proyectos PHP (7.4–8.x hacia 8.5) por módulos de forma determinista primero, preservando HTML/CSS/JS intactos, con soporte opcional de IA BYOK (*Bring Your Own Key*) optimizado para gasto mínimo de tokens y verificación opcional en Docker.
+**Herramienta Open Source en Rust creada para combatir la desactualización de sistemas PHP vulnerables a ataques PHP2Shell / RCE**, permitiendo analizar, comprender la lógica y migrar proyectos desde versiones legadas e inseguras (PHP 7.4–8.x) hacia **PHP 8.5** de forma modular, segura y sin romper la lógica del negocio.
+
+---
+
+## ¿Por qué nace `php-migrator`?
+
+Miles de sitios web, sistemas internos y aplicaciones legacy permanecen atrapados en versiones obsoletas e inseguras de PHP (como 7.4 o inferiores) por miedo a romper la lógica en producción. Esa desactualización expone los servidores a amenazas crecientes como **PHP2Shell**, ejecución remota de código (**RCE**), deserialización insegura y webshells.
+
+`php-migrator` ataca el problema de raíz combinando **análisis estático determinista ultrarrápido (0% IA)**, mapeo previo de dependencias, parcheo quirúrgico que preserva HTML/CSS/JS intactos, asistencia opcional con **IA BYOK** (*Bring Your Own Key*) optimizada para consumir el mínimo de tokens, y verificación opcional en Docker.
 
 ---
 
@@ -41,6 +49,26 @@ php-migrator ai-catalog --configure
 # 5. Verificación dual opcional en Docker (PHP origen vs destino)
 php-migrator sandbox <RUTA_PROYECTO> --source 7.4 --target 8.5
 ```
+
+---
+
+## 🤝 Buscamos Colaboradores
+
+Este proyecto busca activamente **colaboradores de la comunidad** para convertir `php-migrator` en una herramienta robusta y referente contra la deuda técnica y vulnerabilidades en sistemas PHP desactualizados.
+
+Si quieres sumar fuerzas, puedes contribuir en áreas clave como:
+- **Seguridad y Radar PHP2Shell / RCE:** nuevas firmas de detección (webshells, LFI/RFI, `unserialize`, inyección de comandos y SQLi) y reglas de mitigación automática.
+- **Motor de Reglas PHP (AST):** ampliar reglas deterministas entre versiones (`7.x → 8.5`), detección de casos borde y soporte de extensiones.
+- **Adaptadores de Frameworks:** fortalecer los *playbooks* de **Laravel** y sumar adaptadores dedicados para **WordPress**, **CodeIgniter** y **Symfony**.
+- **Pruebas en entornos reales y Sandbox Docker:** perfiles adicionales para Docker (Apache/Nginx/PHP-FPM) y pruebas sobre proyectos legacy reales.
+- **Optimización de IA / Tokens y CLI:** mejorar la condensación de contexto, soporte de nuevos proveedores locales/cloud y experiencia de usuario en consola.
+
+### Cómo contribuir
+
+1. Haz un **Fork** de este repositorio (`https://github.com/DarkUnknowKnigth/php_migrator`).
+2. Crea una rama para tu mejora (`git checkout -b feat/mi-mejora`).
+3. Ejecuta las pruebas con `cargo test` para verificar que todo pase sin regresiones.
+4. Abre un **Pull Request** describiendo el problema que resuelves o la nueva regla/adaptador agregado.
 
 ---
 
